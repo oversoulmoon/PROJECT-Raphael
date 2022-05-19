@@ -1,4 +1,27 @@
-body{
-    display: flexbox;
-    flex-direction: column;   
+*{
+    margin:0%; 
+    padding:0%; 
+    box-sizing: border-box;
+}
+div#nav ul{
+    list-style-type: none;
+}
+div#nav ul li{
+    color: white; 
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 23px;
+    text-align: center;
+    padding: 10px;
+}
+div#nav ul li:hover{
+    background-color: rgba(3, 26, 50, 0.5);
+    cursor:pointer;
+}
+div#nav{
+    background-color: #05386B;
+    height: 100vh;
+    width: 20%;
+    max-width: 200px;
+    display: 1 1 flex;
+    justify-content: center;
 }
