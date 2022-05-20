@@ -1,8 +1,61 @@
+
+/*This is the reset styles*/
 *{
     margin:0%; 
     padding:0%; 
     box-sizing: border-box;
 }
+body{
+    background-color: #edf5e1;
+}
+@media screen and (max-width:640px){ 
+    body{
+        overflow-x: hidden;
+    }
+    div#table nav ul{
+        display:block;
+        position: fixed;
+        top:0%;
+        right: -150px;
+        height:100vh;
+        background-color: #05386b;
+        transition: transform 0.5s; 
+        text-align: center;
+    }
+    div#table nav ul li{
+        display: block;
+        padding: 10px;
+        font-size: 1.3em;
+    }
+    div#table nav li{
+        list-style-type: none;
+    }
+    div#table h4{
+        margin-top: 2%;
+        margin-bottom: 2%;
+        font-size: 5vw;
+    }
+    div#table nav{
+        background-color: #05386b;
+        color:white;
+        display: flex;
+        justify-content: center;
+        position: relative;
+    }
+    div#table img#navicon{
+        display:inline;
+        height:88%;
+        position: absolute; 
+        top:6%;
+        right:2%;
+    }
+    button{
+        width: 25vw;
+        height: 33vw;
+        margin: 2%;
+    }
+}
+/*
 div#nav ul{
     list-style-type: none;
 }
@@ -23,5 +76,14 @@ div#nav{
     width: 20%;
     max-width: 200px;
     display: 1 1 flex;
+    float: left; 
     justify-content: center;
 }
+div#main{
+
+}
+button{
+
+    margin: 3%;
+}
+*/
