@@ -1,4 +1,3 @@
-
 document.getElementById("navicon").addEventListener("click", function(e){
     var navbar = document.getElementById("menu");
     navbar.style.display = "block";
