@@ -10,7 +10,7 @@
     <body>
         <div id="table">
             <nav>
-                <h4 id="title ">PROJECT: Raguel</h4>
+                <h4 id="title">PROJECT: Raguel</h4>
                 <img id="navicon" src="navicon.png"/>
                 <ul id="menu">
                     <li>Convert</li>
@@ -20,19 +20,83 @@
                 </ul>
             </nav>
             <main>
-                <div id="dashboard">
+                <div class="tab" id="dashboard">
                     <button> Test </button>
                     <button> Test </button>
                     <button> Test </button>
                     <button> Test </button>
                     <button> Test </button>
                 </div>
-                <div id="convert">
-                    <button>Upload</button> 
-                    <section id="format">
-                        <input type="selection">
+                <div class="tab" id="convert">
+                    <input type="file" id="fileU" hidden/>
+                    <button id="upload">Upload</button> 
+                    <section id="format">                        
+                        <label for="docTypeList">Convert To:</label>
+                        <select id="docType" name="docTypeList">
+                            <option value="pdf">PDF</option>
+                            <option value="docx">DOCX</option>
+                            <option value="docs">DOCS</option>
+                            <option value="odt">ODF</option>
+                        </select><br/>
+                        <div>
+                            <img id="startFile" src="resources/generalFile.png">
+                            <img id="arrow" src="resources/arrow.png"/>
+                            <img id="endFile"   src="resources/doc.png"/>
+                        </div>
                     </section>
-                    <button>Convert</button>
+                    <button id="convertB">Convert</button>
+                    <table id="fileList">
+                        <tr>
+                            <th colspan="2">
+                                Files
+                            </th>
+                        </tr>
+                        <tr>
+                        </tr>
+                    </table>
+                </div>
+                <div class="tab" id="references">
+                    <p>
+                        Copyright Disclaimer under Section 107 of the copyright act 1976, allowance is made for fair use for purposes such as criticism, comment, news reporting, scholarship, and research. Fair use is a use permitted by copyright statute that might otherwise be infringing. Non-profit, educational or personal use tips the balance in favour of fair use.
+                    </p>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <table id="referencesData">
+                        <tr>
+                            <th>
+                                References
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="tab" id="about">
+                    <pre>
+<b>About</b>
+
+This Project is the final part of the CSC 240 and CSC 100 course offerred in MOT Charter High Schol. The purpose of this project is to provide a document conversion service that is completely client-sided to ensure confidentiality, integrity, and accessibility of confidential documents.
+
+<i>Disclaimer: his project is not responsible for any corrupted documents caused by using the service. USE AT YOUR OWN RISK</i>
+
+
+
+
+Author: Trung Nguyen
+Version: 0.0.alpha
+Date: 05/22/2022
+                    </pre>
+                </div>
+                <div class="tab " id="contact">
+                    <h1>Contact Us</h1>
+                    <form>
+                        <label for="cEmail">Email: </label>
+                        <input class="cInput" type="email" name="cEmail">
+                        <label for="subject">Subject:</label>
+                        <input class="cInput" type="text" name="subject">
+                        <label for="content">Content:</label>
+                        <textarea class="cInput" type="text" name="content"></textarea>
+                        <input type="submit" value="submit">
+                    </form>
                 </div>
             </main>
         </div>

@@ -9,7 +9,7 @@ body{
     background-color: #edf5e1;
 }
 @media screen and (max-width:640px){ 
-    body{
+    html{
         overflow-x: hidden;
     }
     div#table nav ul{
@@ -53,7 +53,7 @@ body{
     }
     div#table main div#dashboard{
         /*Change this in final version*/
-        display: none;
+        display: grid;
         grid-template-columns: 2fr 2fr;
         justify-items: center;
         row-gap: 10%;
@@ -69,9 +69,113 @@ body{
         background-color: #05386b;
     }
     div#table main div#convert{
-        display: grid;
+        /*display: grid;*/
+        display:none;
         grid-template-columns: 0.5fr 2fr 0.5fr;
-
+        padding: 2%;
+        column-gap: 3%;
+        row-gap: 5%;
+        font-size: 4vw;
+    }
+    div#table main div#convert button{
+        overflow: hidden;
+        width: 25vw;
+        height:25vw;
+        font-size: 4vw;
+        border-radius: 10%;
+        border:none;
+    }
+    div#table main div#convert select{
+        font-size: 4vw;
+    }
+    div#table main div#convert button#upload{
+        background-color: #ffe994;
+    }
+    div#table main div#convert button#convertB{
+        background-color: #5cdb95;
+    }
+    div#table main div#convert section#format{
+        width:37vw;
+        height:25vw;
+    }
+    div#table main div#convert img#startFile, img#endFile, img#arrow{
+        width: 5vw;
+        margin: 7% 2% 7% 2%;
+    }
+    div#table main div#convert div{
+        margin:auto;
+        text-align: center;
+    }
+    div#table main div#convert table#fileList{
+        grid-column: auto / span 4;
+        width: 100%;
+    }
+    div#table main div#convert table#fileList tr th{
+        background-color: #ababab;
+        
+    }
+    div#table main div#convert table#fileList tr td.file img.fileImage{
+        width: 30vw;   
+        display: block;
+        margin: auto;
+    }
+    div#table main div#convert table#fileList tr td.file{
+        width: 50vw;
+        text-align: center;
+    }
+    div#table main div#references{
+        display: none;
+        color:#05386b;
+        font-family: 'Times New Roman', Times, serif;
+        padding: 5vw;
+    }
+    div#table main div#references p, table tr th, table tr td p{
+        font-size: 4vw;
+    }
+    div#table main div#references table{
+        width: 90vw;
+    }
+    div#table main div#references table tr th{
+        font-weight: bold;
+        text-align: center;
+    }
+    div#table main div#references table tr td p{
+        padding-left: 2em;
+        text-indent: -2em;
+    }
+    div#table main div#about{
+        display:none;
+    }
+    div#table main div#about pre{
+        white-space: pre-wrap;
+        padding: 2vw;
+        font-size: 3vw;
+    }
+    div#table main div#contact{
+        display:none;
+    }
+    div#table main div#contact h1{
+        display:block;
+        text-align: center;
+        font-size: 5vw;
+        margin-top: 2vh;
+    }
+    div#table main div#contact form input, label, textarea{
+        display:block;
+        font-size: 5vw;
+        margin:1vh auto 1vh auto;
+        width:70vw
+    }
+    div#table main div#contact input[type="submit"]{
+        width: 30vw;
+        float:right; 
+        margin-right: 15vw;
+    }
+    div#table main div#contact textarea[name="content"]{
+        height:50vh;
+        text-align: top;
+        resize: none;
+        font-family: 'Courier New', Courier, monospace;
     }
 }
 /*
