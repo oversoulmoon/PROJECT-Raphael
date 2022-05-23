@@ -8,7 +8,7 @@
 body{
     background-color: #edf5e1;
 }
-@media screen /*and (max-width:640px)*/{ 
+@media screen and (max-width:640px){ 
     html{
         overflow-x: hidden;
     }
@@ -149,6 +149,12 @@ body{
         white-space: pre-wrap;
         padding: 2vw;
         font-size: 3vw;
+    }
+    div#table main div#about canvas#littleGame{
+        width: 90vw;
+        height: 90vw;
+        margin: 5vw;
+        /*border: 1px solid black;*/
     }
     div#table main div#contact{
         display:none;

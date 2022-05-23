@@ -3,6 +3,10 @@ var isMenuClosed = true;
 var nextRow = true;
 var files = [];
 
+function draw(){
+    document.getElementById("littleGame").getContext("2d").fillRect(50,50,50,50);
+}
+
 document.getElementById("upload").addEventListener("click", evt=>{
     document.getElementById("fileU").click();
 });
@@ -17,13 +21,13 @@ document.getElementById("fileU").addEventListener("change", evt=>{
                 fileIcon.setAttribute('src','resources/generalFile.png');
                 break;
             case "html":
-                fileIcon.setAttribute('src','resources/generalFile.png');
+                fileIcon.setAttribute('src','resources/html.png');
                 break;
             case "css":
-                fileIcon.setAttribute('src','resources/generalFile.png');
+                fileIcon.setAttribute('src','resources/css.png');
                 break;
             case "js":
-                fileIcon.setAttribute('src','resources/generalFile.png');
+                fileIcon.setAttribute('src','resources/js.png');
                 break;
             default:
                 invalidFiles++;
@@ -97,6 +101,9 @@ Array.from(document.getElementById("menu").children).forEach(element => {
             document.getElementById(evt.target.innerText.toLowerCase()).style.display = "grid";
         }else{
             document.getElementById(evt.target.innerText.toLowerCase()).style.display = "block";
+        }
+        if(name=="about"){
+            draw();
         }
         document.getElementById("menu").style.transform += "translateX(150px)";
         isMenuClosed = true;
