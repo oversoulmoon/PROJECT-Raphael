@@ -58,7 +58,18 @@ document.getElementById("fileU").addEventListener("change", evt=>{
         //fileRows[fileRows.size-1].innerHTML += tableCell;
     })
 });
-
+document.getElementById("convertB").addEventListener("click", evt =>{
+    files.forEach(file =>{
+        var name = file.name.substring(0,file.name.lastIndexOf("."));
+        var down = document.createElement("a");
+        down.setAttribute("download", `${name}.txt`);
+        down.style.display = "none";
+        down.id = "download" + file.name;
+        down.href = window.URL.createObjectURL(file);
+        document.getElementsByTagName("body")[0].appendChild(down);
+        document.getElementById("download" + file.name).click();
+    });
+});
 Array.from(document.getElementById("menu").children).forEach(element => {
     element.addEventListener("click", evt =>{ 
         Array.from(document.getElementsByClassName("tab")).forEach(container =>{
