@@ -2,10 +2,112 @@ var referencesList = ["Compare all Microsoft 365 Plans (formerly Office 365) - M
 var isMenuClosed = true;
 var nextRow = true;
 var files = [];
-
-function draw(){
-    document.getElementById("littleGame").getContext("2d").fillRect(50,50,50,50);
+class Game{
+    canvas;
+    width;
+    height;
+    ctx;
+    background;
+    bubbles;
+    score;
+    constructor(canvas){
+        this.score = 0;
+        this.canvas = canvas;
+        this.width = canvas.width;
+        this.height = canvas.height;
+        this.ctx = canvas.getContext("2d");
+        this.background = new Image();
+        this.background.src = "resources/gameBackground.jpg";
+        this.bubbles = [new Bubble(this.canvas), new Bubble(this.canvas), new Bubble(this.canvas)];
+        this.canvas.addEventListener("click", (evt)=>{
+            var mouseX = (evt.clientX - (evt.target.getBoundingClientRect()).left) * (this.width/(evt.target.getBoundingClientRect()).width);
+            var mouseY = (evt.clientY - (evt.target.getBoundingClientRect()).top )* (this.height/(evt.target.getBoundingClientRect()).height);
+            this.bubbles.forEach((bubble)=>{
+                var radi = bubble.size;
+                var xMid = bubble.x+ radi;
+                var yMid = bubble.y+ radi;
+                if(mouseX <= (xMid + radi) && mouseX >= (xMid - radi) && mouseY <= (yMid + radi) && mouseY >= (yMid-radi)){
+                    bubble.pop();
+                    this.score++;
+                }
+            });
+        });
+    }
+    draw(){
+        this.ctx.clearRect(0,0,this.width, this.height);
+        this.background.onload = (evt)=>{
+            this.ctx.drawImage(this.background,0,0,this.width,this.height);
+        }
+        this.ctx.drawImage(this.background,0,0,this.width,this.height);
+        this.ctx.font = "4vw Arial";
+        this.ctx.fillText("Score: " + this.score,0,20);
+        this.bubbles.forEach((bubble)=>{
+            bubble.draw();
+        })
+        window.requestAnimationFrame(()=>this.draw());
+    }
 }
+class Bubble{
+    x;
+    y;
+    vy;
+    vx;
+    image;
+    canvas;
+    width;
+    height;
+    ctx; 
+    size;
+    constructor(canvas){
+        this.canvas = canvas; 
+        this.ctx = canvas.getContext("2d");
+        this.width = canvas.width;
+        this.height = canvas.height;
+        this.image = new Image();
+        this.image.src="resources/bubble.png";
+        this.vx = 0;
+        this.vy = (- Math.random())-1;
+        this.size = this.width * 0.09;
+        this.randomizeSpawn();
+        this.y = this.height;
+    }
+    draw(){
+        if(this.y <= 0-this.size){
+            this.y = this.height;
+            this.randomizeSpawn();
+        }
+        this.image.onload = (evt)=>{
+            this.ctx.drawImage(this.image, this.x, this.y, this.size, this.size);
+        }
+        this.ctx.drawImage(this.image, this.x, this.y, this.size,this.size);
+        this.x += this.vx;
+        this.y += this.vy;
+
+    }
+    randomizeSpawn(){
+        this.x = (Math.random()*(this.width-4*this.size)) + 2*this.size;
+    }
+    pop(){
+        this.y = this.height;
+        this.randomizeSpawn();
+        this.draw();
+    }
+}
+/*
+function draw(){
+    var width = canvas.width;
+    var height = canvas.height;
+
+    drawingC.clearRect(0,0,width, height);
+    var background = new Image();
+    background.src = "resources/gameBackground.jpg";  
+    background.onload = (evt)=>{
+        drawingC.drawImage(background, 0,0, width,height);
+    }
+    drawingC.drawImage(background, 0,0, width,height);
+
+    window.requestAnimationFrame(draw);
+}*/
 
 document.getElementById("upload").addEventListener("click", evt=>{
     document.getElementById("fileU").click();
@@ -103,7 +205,7 @@ Array.from(document.getElementById("menu").children).forEach(element => {
             document.getElementById(evt.target.innerText.toLowerCase()).style.display = "block";
         }
         if(name=="about"){
-            draw();
+            (new Game(document.getElementById("littleGame"))).draw();
         }
         document.getElementById("menu").style.transform += "translateX(150px)";
         isMenuClosed = true;
