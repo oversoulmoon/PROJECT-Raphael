@@ -2,6 +2,7 @@ var referencesList = ["Compare all Microsoft 365 Plans (formerly Office 365) - M
 var isMenuClosed = true;
 var nextRow = true;
 var files = [];
+
 class Game{
     canvas;
     width;
@@ -10,8 +11,26 @@ class Game{
     background;
     bubbles;
     score;
-    constructor(canvas){
+    prompt;
+    pText;
+    pInput;
+    windowAnimationStart;
+    firstRound;
+    constructor(canvas, prompt){
+        this.prompt = prompt;
+        this.pText = this.prompt.getElementsByTagName("span")[0];
+        this.pInput = this.prompt.getElementsByTagName("input")[0];
         this.score = 0;
+        this.prompt.style.position = "absolute";
+        this.prompt.style.top = (canvas.getBoundingClientRect()).top;
+        this.prompt.style.height = canvas.offsetHeight + "px";
+        this.pText.innerText = "Would you like to play a game?";
+        this.pInput.value = "Start";
+        this.firstRound = true;
+        this.pInput.addEventListener("click", (evt)=>{
+            this.startGame();
+        })
+
         this.canvas = canvas;
         this.width = canvas.width;
         this.height = canvas.height;
@@ -39,12 +58,50 @@ class Game{
             this.ctx.drawImage(this.background,0,0,this.width,this.height);
         }
         this.ctx.drawImage(this.background,0,0,this.width,this.height);
-        this.ctx.font = "4vw Arial";
-        this.ctx.fillText("Score: " + this.score,0,20);
+
         this.bubbles.forEach((bubble)=>{
             bubble.draw();
         })
-        window.requestAnimationFrame(()=>this.draw());
+        if(window.innerWidth >= 320 && window.innerWidth <= 640){
+            this.ctx.font = "4vw Arial";
+            this.ctx.fillText("Score: " + this.score,0,20);
+        }else if(window.innerWidth >=641){
+            this.ctx.font = "1vw Arial";
+            this.ctx.fillText("Score: " + this.score,10,30);
+        }
+        this.ctx.fillStyle = "#FFFFFF";
+        this.windowAnimationStart = window.requestAnimationFrame(()=>this.draw());
+    }
+    end(){
+        this.ctx.clearRect(0,0,this.width, this.height);
+        window.cancelAnimationFrame(this.windowAnimationStart);
+        this.prompt.style.display = "block";
+        this.pText.innerText = `Score: ${this.score} | Play Again?`
+        this.pInput.value = "Yes";
+        this.score =0;
+
+    }
+    startGame(){
+        if(this.firstRound){
+            this.pInput.style.display = "none";
+            this.pText.innerText = "Pop as many bubbles as possible in 30 seconds";
+            this.firstRound = false;
+            setTimeout(()=>{
+                this.pText.style.display="block";
+                this.pInput.style.display ="block"
+                this.prompt.style.display = "none";
+                this.draw();
+                setTimeout(()=>{
+                    this.end();
+                },30000)
+            },3000);
+        }else{
+            this.prompt.style.display = "none";
+            this.draw();
+            setTimeout(() => {
+                this.end();
+            }, 3000);
+        }
     }
 }
 class Bubble{
@@ -66,7 +123,7 @@ class Bubble{
         this.image = new Image();
         this.image.src="resources/bubble.png";
         this.vx = 0;
-        this.vy = (- Math.random())-1;
+        this.vy = (- Math.random()) - 1;
         this.size = this.width * 0.09;
         this.randomizeSpawn();
         this.y = this.height;
@@ -93,30 +150,14 @@ class Bubble{
         this.draw();
     }
 }
-/*
-function draw(){
-    var width = canvas.width;
-    var height = canvas.height;
-
-    drawingC.clearRect(0,0,width, height);
-    var background = new Image();
-    background.src = "resources/gameBackground.jpg";  
-    background.onload = (evt)=>{
-        drawingC.drawImage(background, 0,0, width,height);
-    }
-    drawingC.drawImage(background, 0,0, width,height);
-
-    window.requestAnimationFrame(draw);
-}*/
-
 document.getElementById("upload").addEventListener("click", evt=>{
     document.getElementById("fileU").click();
 });
 
 document.getElementById("fileU").addEventListener("change", evt=>{
     var invalidFiles = 0; 
-    var fileIcon = document.createElement("img");
     Array.from(evt.target.files).forEach(file=>{
+        var fileIcon = document.createElement("img");
         var isInvalid = false; 
         switch(file.name.substring(file.name.lastIndexOf(".")+1)){
             case "txt":
@@ -124,6 +165,7 @@ document.getElementById("fileU").addEventListener("change", evt=>{
                 break;
             case "html":
                 fileIcon.setAttribute('src','resources/html.png');
+                console.log("this ran");
                 break;
             case "css":
                 fileIcon.setAttribute('src','resources/css.png');
@@ -205,9 +247,11 @@ Array.from(document.getElementById("menu").children).forEach(element => {
             document.getElementById(evt.target.innerText.toLowerCase()).style.display = "block";
         }
         if(name=="about"){
-            (new Game(document.getElementById("littleGame"))).draw();
+            new Game(document.getElementById("littleGame"), document.getElementById("prompt"));
         }
-        document.getElementById("menu").style.transform += "translateX(150px)";
+        if(window.innerWidth<640){
+            document.getElementById("menu").style.transform += "translateX(150px)";
+        }
         isMenuClosed = true;
         document.removeEventListener("click", exitListiner);
     })
@@ -246,3 +290,10 @@ function exitListiner(evt, isChange = false){
         document.removeEventListener("click", exitListiner);
     }
 }
+(document.querySelector("div#table main div#contact input[type='button']")).addEventListener("click", (evt)=>{
+    var form = document.forms["contactForm"];
+    var mail = "mailto:ttrungnguyenhp.2017@gmail.com"
+                + "&subject=" + encodeURIComponent(form.elements["subject"])
+                + "&body=" + encodeURIComponent(form.elements["cEmail"].value + " " + form.elements["content"]);
+    window.location.href = mail;
+})

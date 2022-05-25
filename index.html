@@ -28,7 +28,7 @@
                     <button> Test </button>
                 </div>
                 <div class="tab" id="convert">
-                    <input type="file" id="fileU" hidden/>
+                    <input type="file" id="fileU" multiple hidden/>
                     <button id="upload">Upload</button> 
                     <section id="format">                        
                         <label for="docTypeList">Convert To:</label>
@@ -82,20 +82,29 @@ Author: Trung Nguyen
 Version: 0.0.alpha
 Date: 05/22/2022
                     </pre>
+                    <div id="prompt">
+                        <span>testing texts</span>
+                        <input type="button" value="dflasjdf"/>
+                    </div>
                     <canvas id="littleGame">
                     </canvas>
                 </div>
                 <div class="tab " id="contact">
+                    <h1>Our Mission</h1>
+                    <video id="intro">
+                        <source src="resources/intro.mkv" type="video/mp4"/>
+                    </video>
                     <h1>Contact Us</h1>
-                    <form>
+                    <form id="contactForm">
                         <label for="cEmail">Email: </label>
                         <input class="cInput" type="email" name="cEmail">
                         <label for="subject">Subject:</label>
                         <input class="cInput" type="text" name="subject">
                         <label for="content">Content:</label>
                         <textarea class="cInput" type="text" name="content"></textarea>
-                        <input type="submit" value="submit">
+                        <input type="button" value="SUBMIT">
                     </form>
+
                 </div>
             </main>
         </div>
