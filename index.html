@@ -4,14 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>PROJECT: Raguel</title>
-        <link href="styles.css" rel="stylesheet"/>
-        <script src="script.js" defer></script>
+        <link href="styles/style.css" rel="stylesheet"/>
+        <link href="styles/mobileStyles.css" rel="stylesheet"/>
+        <link href="styles/tabletStyles.css" rel="stylesheet"/>
+        <link href="styles/desktopStyles.css" rel="stylesheet"/>
+        <script src="scripts/script.js" defer></script>
     </head>
     <body>
         <div id="table">
             <nav>
                 <h4 id="title">PROJECT: Raguel</h4>
-                <img id="navicon" src="navicon.png"/>
+                <img id="navicon" src="resources/navicon.png"/>
                 <ul id="menu">
                     <li>Convert</li>
                     <li>References</li>
@@ -21,11 +24,10 @@
             </nav>
             <main>
                 <div class="tab" id="dashboard">
-                    <button> Test </button>
-                    <button> Test </button>
-                    <button> Test </button>
-                    <button> Test </button>
-                    <button> Test </button>
+                    <button id="convertP"></button>
+                    <button id="referencesP"></button>
+                    <button id="aboutP"></button>
+                    <button id="contactP"></button>
                 </div>
                 <div class="tab" id="convert">
                     <input type="file" id="fileU" multiple hidden/>
@@ -91,8 +93,8 @@ Date: 05/22/2022
                 </div>
                 <div class="tab " id="contact">
                     <h1>Our Mission</h1>
-                    <video id="intro">
-                        <source src="resources/intro.mkv" type="video/mp4"/>
+                    <video id="intro" controls>
+                        <source src="resources/intro.mp4" type="video/mp4"/>
                     </video>
                     <h1>Contact Us</h1>
                     <form id="contactForm">
